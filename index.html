@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Projetos Culturais</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Projetos Culturais</h1>
+        <form id="formCadastro" action="submit.php" method="post">
+            
+            <fieldset>
+                <legend>Informações Básicas do Projeto</legend>
+                <label for="titulo">Título do Projeto: <span class="required">*</span></label>
+                <input type="text" id="titulo" name="Título" required>
+
+                <label for="descricao">Descrição do Projeto: <span class="required">*</span></label>
+                <textarea id="descricao" name="descricao" rows="4" required></textarea>
+
+                <label for="categoria">Categoria: <span class="required">*</span></label>
+                <select id="categoria" name="categoria" required>
+                    <option value="musica">Música</option>
+                    <option value="danca">Dança</option>
+                    <option value="teatro">Teatro</option>
+                    <option value="literatura">Literatura</option>
+                    <option value="artes-visuais">Artes Visuais</option>
+                    <option value="audiovisual">Audiovisual</option>
+                </select>
+
+                <label for="publico">Público-Alvo:</label>
+                <input type="text" id="publico" name="publico">
+            </fieldset>
+
+            <fieldset>
+                <legend>Justificativa e Relevância</legend>
+                <label for="justificativa">Justificativa: <span class="required">*</span></label>
+                <textarea id="justificativa" name="justificativa" rows="3" required></textarea>
+
+                <label for="impacto">Impacto Esperado:</label>
+                <textarea id="impacto" name="impacto" rows="3"></textarea>
+            </fieldset>
+
+            <fieldset>
+                <legend>Detalhamento de Orçamento</legend>
+                <label for="valorTotal">Valor Total do Projeto (R$): <span class="required">*</span></label>
+                <input type="text" id="valorTotal" name="valorTotal" required oninput="formatarValor(this)">
+
+                <label for="valorSolicitado">Valor Solicitado ao Patrocínio (R$): <span class="required">*</span></label>
+                <input type="text" id="valorSolicitado" name="valorSolicitado" required oninput="formatarValor(this)">
+            </fieldset>
+
+            <fieldset>
+                <legend>Equipe Responsável</legend>
+                <label for="responsavel">Responsável pelo Projeto: <span class="required">*</span></label>
+                <input type="text" id="responsavel" name="responsavel" required>
+
+                <label for="equipe">Equipe Executora:</label>
+                <textarea id="equipe" name="equipe" rows="3"></textarea>
+            </fieldset>
+
+            <fieldset>
+                <legend>Viabilidade e Sustentabilidade</legend>
+                <label for="planoExecucao">Plano de Execução:</label>
+                <textarea id="planoExecucao" name="planoExecucao" rows="3"></textarea>
+
+                <label for="sustentabilidade">Plano de Sustentabilidade:</label>
+                <textarea id="sustentabilidade" name="sustentabilidade" rows="3"></textarea>
+            </fieldset>
+
+            <fieldset>
+                <legend>Avaliação e Métricas de Sucesso</legend>
+                <label for="metricas">Métricas de Sucesso:</label>
+                <textarea id="metricas" name="metricas" rows="3"></textarea>
+            </fieldset>
+
+            <fieldset>
+                <legend>Documentação Complementar</legend>
+                <label for="anexos">Anexos:</label>
+                <input type="file" id="anexos" name="anexos[]" multiple>
+            </fieldset>
+
+            <button type="submit">Enviar Projeto</button>
+        </form>
+    </div>
+
+    <div class="toggle-container" id="toggleContainer">
+        <div class="toggle-ball"></div>
+    </div>
+
+    <style>
+        .required {
+            color: red;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 30px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-ball {
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        .toggle-container.dark {
+            background-color: #007bff;
+        }
+
+        .toggle-container.dark .toggle-ball {
+            transform: translateX(30px);
+        }
+    </style>
+
+    <script>
+        const toggleContainer = document.getElementById('toggleContainer');
+        const body = document.body;
+
+        toggleContainer.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+            toggleContainer.classList.toggle('dark');
+
+            if (body.classList.contains('dark-mode')) {
+                toggleContainer.setAttribute('aria-label', 'Modo Claro');
+            } else {
+                toggleContainer.setAttribute('aria-label', 'Modo Escuro');
+            }
+        });
+
+        function formatarValor(input) {
+            let valor = input.value.replace(/[^\d,\.]/g, ''); 
+            valor = valor.replace(",", "."); 
+            input.value = valor;
+        }
+    </script>
+</body>
+</html>
