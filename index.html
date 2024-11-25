@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Cadastro de Projetos Culturais</h1>
-        <form id="formCadastro" action="submit.php" method="post">
+        <form id="formCadastro" action="javascript:void(0);" method="post">
             
             <fieldset>
                 <legend>Informações Básicas do Projeto</legend>
@@ -148,6 +148,14 @@
             valor = valor.replace(",", "."); 
             input.value = valor;
         }
+
+        const formCadastro = document.getElementById('formCadastro');
+
+        formCadastro.addEventListener('submit', (e) => {
+            e.preventDefault(); 
+            alert("Projeto cadastrado com sucesso!");
+            window.location.href = "index2.html"; 
+        });
     </script>
 </body>
 </html>
